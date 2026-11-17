@@ -1,0 +1,5 @@
+interface:
+  display_name: "UT61E+ DMM"
+  short_description: "Read and check UT61E+ bench measurements"
+  default_prompt: "Use $ut61e-dmm to read the connected meter and check the measurement against my limits."
+

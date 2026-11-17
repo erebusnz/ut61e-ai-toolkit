@@ -1,0 +1,273 @@
+[
+  {
+    "name": "dmm_list_devices",
+    "description": "List USB bridge candidates. Multiple candidates require a serial or path_hex selector.",
+    "inputSchema": {
+      "properties": {},
+      "title": "dmm_list_devicesArguments",
+      "type": "object"
+    },
+    "outputSchema": {
+      "additionalProperties": true,
+      "title": "dmm_list_devicesDictOutput",
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false
+    }
+  },
+  {
+    "name": "dmm_identify",
+    "description": "Read model identity; refuse devices other than UT61E+. Does not change meter mode.",
+    "inputSchema": {
+      "properties": {
+        "serial": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Serial"
+        },
+        "path_hex": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path Hex"
+        },
+        "timeout": {
+          "default": 3.0,
+          "maximum": 30,
+          "minimum": 0.05,
+          "title": "Timeout",
+          "type": "number"
+        }
+      },
+      "title": "dmm_identifyArguments",
+      "type": "object"
+    },
+    "outputSchema": {
+      "additionalProperties": true,
+      "title": "dmm_identifyDictOutput",
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false
+    }
+  },
+  {
+    "name": "dmm_read",
+    "description": "Read bounded samples with base units, mode, flags and raw frames. Never simulates USB.",
+    "inputSchema": {
+      "properties": {
+        "count": {
+          "default": 1,
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Count",
+          "type": "integer"
+        },
+        "interval": {
+          "default": 0.5,
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Interval",
+          "type": "number"
+        },
+        "timeout": {
+          "default": 3.0,
+          "maximum": 30,
+          "minimum": 0.05,
+          "title": "Timeout",
+          "type": "number"
+        },
+        "total_timeout": {
+          "default": 60.0,
+          "maximum": 60,
+          "minimum": 0.05,
+          "title": "Total Timeout",
+          "type": "number"
+        },
+        "serial": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Serial"
+        },
+        "path_hex": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path Hex"
+        }
+      },
+      "title": "dmm_readArguments",
+      "type": "object"
+    },
+    "outputSchema": {
+      "additionalProperties": true,
+      "title": "dmm_readDictOutput",
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false
+    }
+  },
+  {
+    "name": "dmm_check",
+    "description": "Check every sample against inclusive base-unit limits and an exact mode (e.g. DCV/V,\nDCmV/V, OHM/ohm, CONT/ohm, DIODE/V, CAP/F, Hz/Hz, DCmA/A). Optional max_span\nbounds sample max-minus-min. HOLD, REL, MIN/MAX, peak, low battery, overload,\nunknown modes or mismatches make the verdict invalid. Inspect verdict and sources.\n",
+    "inputSchema": {
+      "properties": {
+        "mode": {
+          "enum": [
+            "ACV",
+            "DCV",
+            "ACmV",
+            "DCmV",
+            "Hz",
+            "%",
+            "OHM",
+            "CONT",
+            "DIODE",
+            "CAP",
+            "DCuA",
+            "ACuA",
+            "DCmA",
+            "ACmA",
+            "DCA",
+            "ACA",
+            "LPF"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "unit": {
+          "enum": [
+            "V",
+            "A",
+            "ohm",
+            "F",
+            "Hz",
+            "%"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "minimum": {
+          "title": "Minimum",
+          "type": "number"
+        },
+        "maximum": {
+          "title": "Maximum",
+          "type": "number"
+        },
+        "max_span": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Span"
+        },
+        "count": {
+          "default": 5,
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Count",
+          "type": "integer"
+        },
+        "interval": {
+          "default": 0.5,
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Interval",
+          "type": "number"
+        },
+        "timeout": {
+          "default": 3.0,
+          "maximum": 30,
+          "minimum": 0.05,
+          "title": "Timeout",
+          "type": "number"
+        },
+        "total_timeout": {
+          "default": 60.0,
+          "maximum": 60,
+          "minimum": 0.05,
+          "title": "Total Timeout",
+          "type": "number"
+        },
+        "serial": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Serial"
+        },
+        "path_hex": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path Hex"
+        }
+      },
+      "required": [
+        "mode",
+        "unit",
+        "minimum",
+        "maximum"
+      ],
+      "title": "dmm_checkArguments",
+      "type": "object"
+    },
+    "outputSchema": {
+      "additionalProperties": true,
+      "title": "dmm_checkDictOutput",
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false
+    }
+  }
+]
